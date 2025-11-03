@@ -1,5 +1,9 @@
 # File Encryption & Decryption System
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.x](https://img.shields.io/badge/python-3.x-blue.svg)](https://www.python.org/)
+[![GUI: CustomTkinter](https://img.shields.io/badge/GUI-CustomTkinter-green.svg)](https://github.com/TomSchimansky/CustomTkinter)
+
 Sistem enkripsi dan dekripsi file yang mendukung berbagai format termasuk file video, menggunakan algoritma kriptografi modern dengan GUI yang modern dan minimalist.
 
 **Created by:** Matthew Raymond Hartono
@@ -332,9 +336,15 @@ A: Ya! File terenkripsi sangat aman untuk cloud.
 
 ---
 
-## 📜 Lisensi
+## 📜 License
 
-Program ini dibuat untuk tujuan edukatif dan dapat digunakan secara bebas.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+**Summary:**
+- ✅ Free to use, modify, and distribute
+- ✅ Commercial use allowed
+- ✅ Include original copyright notice
+- ✅ No warranty provided
 
 ---
 
