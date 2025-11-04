@@ -1,370 +1,208 @@
-# File Encryption & Decryption System
+# File Encryption System
+
+A modern file encryption tool supporting AES-256-GCM and ChaCha20-Poly1305 with GUI interface.
+
+**Author:** Matthew Raymond Hartono
+**NIM:** A11.2021.13275
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.x](https://img.shields.io/badge/python-3.x-blue.svg)](https://www.python.org/)
-[![GUI: CustomTkinter](https://img.shields.io/badge/GUI-CustomTkinter-green.svg)](https://github.com/TomSchimansky/CustomTkinter)
 
-Sistem enkripsi dan dekripsi file yang mendukung berbagai format termasuk file video, menggunakan algoritma kriptografi modern dengan GUI yang modern dan minimalist.
+## Choose Your Version
 
-**Created by:** Matthew Raymond Hartono
-**NIM:** A11.2021.13275
+This project has two versions to suit different needs:
 
----
+### [v1 - Basic Encryption](v1/)
+Simple and straightforward encryption for everyday use.
+- ✓ AES-256-GCM and ChaCha20-Poly1305
+- ✓ Modern GUI with dark/light theme
+- ✓ PBKDF2 key derivation
+- ✓ Quick setup, minimal dependencies
+- **Use if:** You need simple, reliable encryption
 
-## 📋 Fitur Utama
+### [v2 - Advanced Encryption](v2/)
+Professional-grade security with advanced features.
+- ✓ All v1 features PLUS:
+- ✓ Argon2id key derivation (GPU-resistant)
+- ✓ Zstandard compression (30-70% smaller files)
+- ✓ Multi-layer encryption (ChaCha20 + AES)
+- ✓ Batch processing for multiple files/folders
+- ✓ Password strength meter
+- ✓ Secure file deletion
+- **Use if:** You need maximum security or batch operations
 
-### Algoritma Kriptografi
-- **AES-256-GCM** (Advanced Encryption Standard)
-- **ChaCha20-Poly1305** (Modern stream cipher)
+**Quick Decision:** Start with v1 for basic needs, upgrade to v2 for advanced features.
 
-### Support File
-- **Video**: MP4, AVI, MKV, MOV, FLV, WMV, WEBM, M4V, MPEG
-- **Semua format file lainnya**
+## Features
 
-### Keamanan
-- PBKDF2 key derivation (100,000 iterasi)
-- Authenticated encryption (GCM & Poly1305)
-- Random salt dan nonce untuk setiap enkripsi
-- Password-based encryption
+### Encryption
+- **AES-256-GCM** - Industry standard encryption
+- **ChaCha20-Poly1305** - Fast modern cipher
+- **Argon2id** key derivation (optional PBKDF2)
+- **Zstandard compression** - Reduce file size before encryption
+- **Multi-layer encryption** - Double encryption for extra security
 
-### GUI Modern
-- Dark/Light theme toggle 🌙☀️
-- Drag & drop file support 📁
-- Progress bar real-time 📊
-- Show/hide password 👁
-- Auto-restore ekstensi file original
+### Interface
+- Modern GUI with dark/light theme
+- CLI for command-line usage
+- Batch processing for multiple files
+- Real-time progress tracking
+- Password strength indicator
 
----
+### Security
+- Authenticated encryption (AEAD)
+- Random salt and nonce per encryption
+- SHA-256 file integrity verification
+- Secure file deletion (3-pass overwrite)
 
-## 🚀 Quick Start
+## Installation
 
-### 1. Install Dependencies
-
-**Windows (Otomatis):**
 ```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Or use the installer (Windows)
 install_dependencies.bat
 ```
 
-**Manual:**
-```bash
-pip install -r requirements.txt
-```
+## Quick Start
 
-### 2. Jalankan Aplikasi
-
-**GUI (Recommended):**
+### GUI (Recommended)
 ```bash
-run_gui.bat
-```
-atau
-```bash
+# Basic GUI (v1)
+cd v1
 python crypto_gui.py
+
+# Advanced GUI (v2)
+cd v2
+python crypto_gui_advanced.py
 ```
 
-**CLI:**
-```bash
-python crypto_file.py
-```
+**Windows Users:** Use `run_gui.bat` (v1) or `run_advanced_gui.bat` (v2)
 
----
+### CLI Usage
 
-## 💻 Cara Penggunaan GUI
-
-### Enkripsi File
-
-1. **Buka aplikasi** → Jalankan `run_gui.bat`
-2. **Pilih "Encrypt"** (default)
-3. **Pilih algoritma** → AES-256-GCM atau ChaCha20-Poly1305
-4. **Browse file** → Pilih file yang akan dienkripsi
-5. **Masukkan password** → Minimal 8 karakter
-6. **Klik "ENCRYPT FILE"** → Tunggu selesai
-
-**Hasil:**
-```
-Input:  video.mp4
-Output: video.mp4.encrypted
-```
-
-### Dekripsi File
-
-1. **Pilih "Decrypt"**
-2. **Pilih algoritma yang sama** dengan saat enkripsi
-3. **Browse file** → Pilih file `.encrypted`
-4. **Masukkan password** yang sama
-5. **Klik "DECRYPT FILE"**
-
-**Hasil:**
-```
-Input:  video.mp4.encrypted
-Output: video_decrypted.mp4  ← Bisa langsung dibuka!
-```
-
----
-
-## 🎯 Fitur GUI
-
-| Fitur | Deskripsi |
-|-------|-----------|
-| 🔒/🔓 | Toggle Encrypt/Decrypt mode |
-| 🎨 | Dark/Light theme switch |
-| 📁 | Drag & drop file atau browse |
-| 👁 | Show/hide password |
-| 📊 | Progress bar saat proses |
-| ✨ | Auto-generate output path |
-| 🔐 | Restore ekstensi file original |
-
----
-
-## 📖 Penggunaan Programmatic
-
-### Contoh Enkripsi dengan AES
-
+**v1 - Basic:**
 ```python
-from crypto_file import FileCrypto
+from v1.crypto_file import FileCrypto
 
-# Inisialisasi dengan AES
-crypto = FileCrypto(algorithm="AES")
-
-# Enkripsi file
-result = crypto.encrypt_file(
-    input_file="video.mp4",
-    output_file="video.mp4.encrypted",
-    password="MySecurePassword123"
-)
-
-print(f"Encrypted: {result['output_file']}")
+crypto = FileCrypto("AES")
+crypto.encrypt_file("document.pdf", "document.pdf.encrypted", "password")
 ```
 
-### Contoh Dekripsi dengan AES
-
+**v2 - Advanced:**
 ```python
-from crypto_file import FileCrypto
+from v2.crypto_advanced import AdvancedCrypto
 
-# Inisialisasi dengan AES
-crypto = FileCrypto(algorithm="AES")
-
-# Dekripsi file
-result = crypto.decrypt_file(
-    input_file="video.mp4.encrypted",
-    output_file="video_decrypted.mp4",
-    password="MySecurePassword123"
-)
-
-print(f"Decrypted: {result['output_file']}")
+crypto = AdvancedCrypto("AES", use_argon2=True, compress=True)
+crypto.encrypt_file("video.mp4", "video.mp4.encrypted", "password")
 ```
 
-### Contoh dengan ChaCha20
+See [v1/README.md](v1/) or [v2/README.md](v2/) for detailed examples.
 
-```python
-from crypto_file import FileCrypto
+## Supported Formats
 
-# Enkripsi dengan ChaCha20
-crypto = FileCrypto(algorithm="ChaCha20")
-crypto.encrypt_file("movie.avi", "movie.avi.encrypted", "password")
+Works with all file types, optimized for:
+- Video: MP4, AVI, MKV, MOV, FLV, WMV, WEBM
+- Documents: PDF, DOCX, XLSX
+- Images: JPG, PNG, GIF
+- Archives: ZIP, RAR, 7Z
 
-# Dekripsi
-crypto.decrypt_file("movie.avi.encrypted", "movie_decrypted.avi", "password")
-```
+## Algorithm Comparison
 
----
+| Feature | AES-256-GCM | ChaCha20-Poly1305 |
+|---------|-------------|-------------------|
+| Speed (with AES-NI) | Very Fast | Fast |
+| Speed (without) | Moderate | Very Fast |
+| Security | Excellent | Excellent |
+| Best For | Desktop/Server | Mobile/Embedded |
 
-## 🔐 Perbandingan Algoritma
+## Security Best Practices
 
-### AES-256-GCM
-✅ Standar industri yang terpercaya
-✅ Hardware acceleration di CPU modern
-✅ Sangat cepat dengan AES-NI
-❌ Lebih lambat tanpa hardware support
+**Strong Passwords:**
+- Minimum 12 characters
+- Mix of upper/lowercase, numbers, symbols
+- Example: `MySecure!Pass2025`
 
-### ChaCha20-Poly1305
-✅ Performa konsisten di semua perangkat
-✅ Sangat cepat di mobile/embedded
-✅ Aman terhadap timing attacks
-❌ Kurang hardware acceleration
+**Usage:**
+- Never reuse passwords
+- Store encrypted files separately from password
+- Use password manager
+- Backup original files
 
-**Rekomendasi:**
-- **Desktop/Laptop modern** → AES-256-GCM
-- **Mobile/Embedded** → ChaCha20-Poly1305
+## Development
 
----
-
-## 🛡️ Keamanan
-
-### Best Practices
-
-**Password Kuat:**
-```
-❌ Lemah:   password123
-✅ Kuat:    MyV1de0!2025@Secure
-```
-
-**Tips Keamanan:**
-1. Gunakan password minimal 12-16 karakter
-2. Kombinasi huruf besar, kecil, angka, simbol
-3. Simpan password di password manager
-4. Jangan hardcode password di kode
-5. Backup file original sebelum enkripsi
-6. Gunakan algoritma yang sama untuk dekripsi
-
-### Fitur Keamanan
-
-| Fitur | Spesifikasi |
-|-------|-------------|
-| Key Derivation | PBKDF2-HMAC-SHA256 |
-| Iterasi | 100,000 |
-| Salt | 16 bytes (random) |
-| Nonce | 12 bytes (random) |
-| Encryption | AEAD (Authenticated Encryption) |
-
----
-
-## 🧪 Testing
-
-Jalankan unit tests:
-
+### Run Tests
 ```bash
 python test_crypto.py
 ```
 
-Test coverage:
-- ✅ Enkripsi/Dekripsi AES
-- ✅ Enkripsi/Dekripsi ChaCha20
-- ✅ Deteksi file video
-- ✅ Password salah
-- ✅ Algoritma berbeda
-- ✅ File besar (1MB+)
-- ✅ File kosong
-- ✅ Metadata preservation
-
----
-
-## 📂 Struktur File
-
+### File Structure
 ```
 crypto/
-├── crypto_file.py              # Core encryption engine
-├── crypto_gui.py               # Modern GUI application
-├── test_crypto.py              # Unit tests
-├── requirements.txt            # Python dependencies
-├── install_dependencies.bat    # Auto installer (Windows)
-├── run_gui.bat                 # GUI launcher (Windows)
-├── .gitignore                  # Git ignore rules
-└── README.md                   # Documentation (this file)
+├── v1/                         # Basic version
+│   ├── crypto_file.py          # Core encryption
+│   ├── crypto_gui.py           # Basic GUI
+│   ├── run_gui.bat             # Windows launcher
+│   └── README.md               # v1 documentation
+├── v2/                         # Advanced version
+│   ├── crypto_advanced.py      # Advanced encryption
+│   ├── batch_crypto.py         # Batch processing
+│   ├── crypto_gui_advanced.py  # Advanced GUI
+│   ├── run_advanced_gui.bat    # Windows launcher
+│   └── README.md               # v2 documentation
+├── test_crypto.py              # Tests
+├── requirements.txt            # Dependencies
+├── CHANGELOG.md                # Version history
+├── LICENSE                     # MIT license
+└── README.md                   # This file
 ```
 
----
+## Changelog
 
-## ⚠️ Troubleshooting
+### v2.0 (Current)
+- Added Argon2id key derivation
+- Added Zstandard compression
+- Added multi-layer encryption
+- Added password strength meter
+- Added batch processing
+- Added file integrity verification
+- Improved GUI with advanced options
 
-### "Password salah atau file corrupt"
-- Pastikan password **sama persis** dengan saat enkripsi
-- Pastikan algoritma sama (AES/ChaCha20)
-- Periksa file tidak corrupt
+### v1.0
+- AES-256-GCM and ChaCha20-Poly1305
+- Basic GUI with theme support
+- PBKDF2 key derivation
+- Video file optimization
 
-### "File tidak ditemukan"
-- Periksa path file
-- Gunakan absolute path
-- Periksa permission read/write
-
-### "Import Error"
-```bash
-# Install ulang dependencies
-pip install --upgrade -r requirements.txt
-```
-
-### GUI tidak muncul
-```bash
-# Install ulang customtkinter
-pip install --upgrade customtkinter
-```
-
----
-
-## 📊 Format Video yang Didukung
-
-Program secara otomatis mendeteksi file video:
-
-| Format | Extension | Deskripsi |
-|--------|-----------|-----------|
-| MP4 | `.mp4` | MPEG-4 Part 14 |
-| AVI | `.avi` | Audio Video Interleave |
-| MKV | `.mkv` | Matroska Video |
-| MOV | `.mov` | QuickTime Movie |
-| FLV | `.flv` | Flash Video |
-| WMV | `.wmv` | Windows Media Video |
-| WEBM | `.webm` | WebM Video |
-| M4V | `.m4v` | iTunes Video |
-| MPEG | `.mpeg`, `.mpg` | MPEG Video |
-
-**Plus semua format file lainnya!**
-
----
-
-## 📝 Dependencies
+## Dependencies
 
 ```
-cryptography>=41.0.0      # Core encryption
-customtkinter>=5.2.0      # Modern GUI
-Pillow>=10.0.0           # Image support
-tkinterdnd2>=0.3.0       # Drag & drop (optional)
+cryptography>=41.0.0
+customtkinter>=5.2.0
+argon2-cffi>=23.1.0
+zstandard>=0.22.0
+zxcvbn>=4.4.28
 ```
 
----
+## License
 
-## ❓ FAQ
+MIT License - see [LICENSE](LICENSE) file for details.
 
-**Q: Apakah file original akan terhapus?**
-A: Tidak! File original tetap aman. Enkripsi membuat file baru.
-
-**Q: Bisakah membuka file terenkripsi tanpa password?**
-A: Tidak mungkin. Password wajib untuk dekripsi.
-
-**Q: Lupa password, bagaimana?**
-A: Tidak ada cara untuk recover. Pastikan simpan password dengan aman!
-
-**Q: File hasil dekripsi berbeda dari original?**
-A: Jika password dan algoritma benar, file 100% identik.
-
-**Q: Berapa lama proses enkripsi?**
-A:
-- 10MB: < 5 detik
-- 100MB: < 30 detik
-- 1GB: 1-3 menit
-
-**Q: Apakah aman untuk cloud storage?**
-A: Ya! File terenkripsi sangat aman untuk cloud.
-
----
-
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-**Summary:**
-- ✅ Free to use, modify, and distribute
-- ✅ Commercial use allowed
-- ✅ Include original copyright notice
-- ✅ No warranty provided
-
----
-
-## 👨‍💻 Author
+## Author
 
 **Matthew Raymond Hartono**
-- NIM: A11.2021.13275
-- Program: File Encryption & Decryption System
-- Algoritma: AES-256-GCM & ChaCha20-Poly1305
+NIM: A11.2021.13275
+
+Created for Cryptography course project.
+
+## Disclaimer
+
+- For educational and personal use
+- Always backup important files
+- Developer not responsible for data loss
+- Use at your own risk
 
 ---
 
-## ⚖️ Disclaimer
-
-- Program ini untuk tujuan edukatif dan penggunaan personal
-- Selalu backup file penting sebelum enkripsi
-- Developer tidak bertanggung jawab atas kehilangan data
-- Pastikan menyimpan password dengan aman
-- Gunakan untuk tujuan legal dan etis
-
----
-
-**© 2025 Matthew Raymond Hartono - A11.2021.13275**
+**© 2025 Matthew Raymond Hartono**

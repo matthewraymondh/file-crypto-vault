@@ -2,3 +2,6 @@ cryptography>=41.0.0
 customtkinter>=5.2.0
 Pillow>=10.0.0
 tkinterdnd2>=0.3.0
+argon2-cffi>=23.1.0
+zstandard>=0.22.0
+zxcvbn>=4.4.28
